@@ -23,7 +23,7 @@ def get_args():
     parser.add_argument('--tau', default=1.0, type=float, help='generalized advantage estimation discount')
     parser.add_argument('--horizon', default=0.99, type=float, help='horizon for running averages')
     parser.add_argument('--hidden', default=256, type=int, help='hidden size of GRU')
-    parser.add_argument('--save-dir', default='', type=str, help='save directory')
+    parser.add_argument('--save_dir', default='', type=str, help='save directory')
     return parser.parse_args()
 
 discount = lambda x, gamma: lfilter([1],[1,-gamma],x[::-1])[::-1] # discounted rewards one liner
