@@ -23,6 +23,7 @@ def get_args():
     parser.add_argument('--tau', default=1.0, type=float, help='generalized advantage estimation discount')
     parser.add_argument('--horizon', default=0.99, type=float, help='horizon for running averages')
     parser.add_argument('--hidden', default=256, type=int, help='hidden size of GRU')
+    parser.add_argument('--save-dir', default='', type=str, help='save directory')
     return parser.parse_args()
 
 discount = lambda x, gamma: lfilter([1],[1,-gamma],x[::-1])[::-1] # discounted rewards one liner
@@ -166,7 +167,8 @@ if __name__ == "__main__":
         raise ValueError("Must be using Python 3 with linux!")  # or else you get a deadlock in conv2d
 
     args = get_args()
-    args.save_dir = '{}/'.format(args.env.lower()) # keep the directory structure simple
+    if not args.save_dir:
+        args.save_dir = '{}/'.format(args.env.lower()) # keep the directory structure simple
     if args.render:  args.processes = 1 ; args.test = True # render mode -> test mode w one process
     if args.test:  args.lr = 0 # don't train in render mode
     args.num_actions = gym.make(args.env).action_space.n # get the action space of this game
