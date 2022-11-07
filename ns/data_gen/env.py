@@ -63,6 +63,8 @@ if __name__ == '__main__':
     parser.add_argument('--save-state-ids', action='store_true', default=False)
     parser.add_argument('--seed', type=int, default=1,
                         help='Random seed.')
+    parser.add_argument('--steps', type=int, default=50,
+                        help='Random seed.')
     args = parser.parse_args()
 
     logger.set_level(logger.INFO)
@@ -89,7 +91,7 @@ if __name__ == '__main__':
         warmstart = 50
 
     if args.atari:
-        env._max_episode_steps = warmstart + 11
+        env._max_episode_steps = warmstart + args.steps
 
     replay_buffer = []
 
