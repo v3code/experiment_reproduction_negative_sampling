@@ -91,7 +91,7 @@ if __name__ == '__main__':
         warmstart = 50
 
     if args.atari:
-        env._max_episode_steps = warmstart + args.steps
+        env._max_episode_steps = warmstart + args.steps + 1
 
     replay_buffer = []
 
